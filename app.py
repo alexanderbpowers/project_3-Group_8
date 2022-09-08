@@ -1,51 +1,33 @@
-
-
-
-
-
-
-
-
-
-
-
 ## Dependencies and set up
-
-import numpy as np
-import sqlalchemy
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.ext.automap import automap_base
-from sqlalchemy.orm import Session
-from sqlalchemy import create_engine, func
 from flask import (
     Flask,
     render_template,
     jsonify,
     request,
     redirect)
+import numpy as np
+# from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.ext.automap import automap_base
+from sqlalchemy.orm import Session
+from sqlalchemy import create_engine
 
-# postgres_uri = ""
-# engine = create_engine(postgres_uri)
-# Base = automap_base()
-# Base.prepare(engine, reflect=True)
+postgres_uri = 'postgresql://irkqykpauqvpzm:b6a2bf95436de0394e29cb2c7b916b56f18fe92c6a3f5ac85638d94c4a93b081@ec2-107-22-122-106.compute-1.amazonaws.com:5432/d5tqri7nt2h2k0'
+engine = create_engine(postgres_uri)
+Base = automap_base()
+Base.prepare(engine, reflect=True)
 
-# north_table = Base.classes.north
-# stations = Base.classes.stations
+north_table = Base.classes.north
+stations = Base.classes.stations
 
 ## Routes
 
 app = Flask(__name__)
 
-postgres_uri = 'postgresql://irkqykpauqvpzm:b6a2bf95436de0394e29cb2c7b916b56f18fe92c6a3f5ac85638d94c4a93b081@ec2-107-22-122-106.compute-1.amazonaws.com:5432/d5tqri7nt2h2k0'
-
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(postgres_uri, '')  # or "sqlite:///db.sqlite"
-
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# postgres_uri = 'postgresql://irkqykpauqvpzm:b6a2bf95436de0394e29cb2c7b916b56f18fe92c6a3f5ac85638d94c4a93b081@ec2-107-22-122-106.compute-1.amazonaws.com:5432/d5tqri7nt2h2k0'
+# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(postgres_uri, '')
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
-
-from .models import North
-from .models import Stations
 
 
 
