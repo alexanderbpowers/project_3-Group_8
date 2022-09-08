@@ -1,6 +1,6 @@
 
 // Create listner function for changes on dropdown
-function optionChanged(station) {
+function optionChanged(weatherDate) {
   demoInfo(station);
   hBar(station);
   bubble(station);
@@ -13,27 +13,27 @@ function dropMenu() {
   // create id dropdown list
   var selection = d3.select("#selDataset");
 
-  d3.json("merged_stations.json").then((data) => {
-    var station = data.station;
-    station.forEach((name) => {
+  d3.json("all_north.json").then((data) => {
+    var date = data.date;
+    station.forEach((day) => {
       selection
         .append("option")
-        .text(name)
-        .property("value", name);
+        .text(days)
+        .property("value", ndayame);
     });
 
     //set default value
-    var defaultStation = station[0];
-    hBar(defaultStation);
-    demoInfo(defaultStation);
-    bubble(defaultStation);
-    gauge(defaultStation);
+    var defaultDate = date[0];
+    hBar(defaultDate);
+    demoInfo(defaultDate);
+    bubble(defaultDate);
+    gauge(defaultDate);
   });
 }
 
 // used sample id to poplate infoPanel with details
 function demoInfo(id) {
-  d3.json("all_north.json").then((data) => {
+  d3.json("merged_stations.json").then((data) => {
     var filtered = data.metadata;
     // console.log(metadata);
     var info = filtered.filter(sampleId => sampleId.id.toString() === id)[0];

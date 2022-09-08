@@ -1,5 +1,4 @@
 ## Dependencies and set up
-
 from flask import Flask, render_template, jsonify, request, redirect
 import numpy as np
 from flask_sqlalchemy import SQLAlchemy
@@ -15,6 +14,8 @@ Base.prepare(engine, reflect=True)
 north_table = Base.classes.north
 stations = Base.classes.stations
 
+print(north_table)
+print(stations)
 ## Routes
 
 app = Flask(__name__)
@@ -26,6 +27,7 @@ db = SQLAlchemy(app)
 @app.route("/")
 def home():
     return render_template("index.html")
+    # return "hello world"
 
 
 @app.route("/api/north")
