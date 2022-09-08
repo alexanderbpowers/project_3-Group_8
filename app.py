@@ -23,14 +23,35 @@ from flask import (
     jsonify,
     request,
     redirect)
+<<<<<<< Updated upstream
+=======
+import numpy as np
+# from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.ext.automap import automap_base
+from sqlalchemy.orm import Session
+from sqlalchemy import create_engine
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import inspect
+>>>>>>> Stashed changes
 
 # postgres_uri = ""
 # engine = create_engine(postgres_uri)
 # Base = automap_base()
 # Base.prepare(engine, reflect=True)
 
+<<<<<<< Updated upstream
 # north_table = Base.classes.north
 # stations = Base.classes.stations
+=======
+# north_table = Base.classes.North
+# stations = Base.classes.Stations
+
+print(Base.classes.keys())
+
+# inspector = inspect(engine)
+# print(inspector.get_table_names())
+# columns = inspector.get_columns('TABLENAME')
+>>>>>>> Stashed changes
 
 ## Routes
 
@@ -67,7 +88,7 @@ def north():
 @app.route("/api/stations")
 def merged():
     session = Session(engine)
-    results = session.query(north.city, north.max_temp, north.min_temp, stations.station_name, stations.station_code).all()
+    results = session.query(north_table.city, north_table.max_temp, north_table.min_temp, stations.station_name, stations.station_code).all()
     session.close()
     merged_stations = []
     for city, max_temp, min_temp, station_name, station_code in results:
@@ -85,28 +106,28 @@ if __name__ == "__main__":
 
 
 ####
-@app.route("/api/pals")
-def pals():
-    results = db.session.query(Pet.name, Pet.lat, Pet.lon).all()
+# @app.route("/api/pals")
+# def pals():
+#     results = db.session.query(Pet.name, Pet.lat, Pet.lon).all()
 
-    hover_text = [result[0] for result in results]
-    lat = [result[1] for result in results]
-    lon = [result[2] for result in results]
+#     hover_text = [result[0] for result in results]
+#     lat = [result[1] for result in results]
+#     lon = [result[2] for result in results]
 
-    pet_data = [{
-        "type": "scattergeo",
-        "locationmode": "USA-states",
-        "lat": lat,
-        "lon": lon,
-        "text": hover_text,
-        "hoverinfo": "text",
-        "marker": {
-            "size": 15,
-            "line": {
-                "color": "rgb(8,8,8)",
-                "width": 1
-            },
-        }
-    }]
+#     pet_data = [{
+#         "type": "scattergeo",
+#         "locationmode": "USA-states",
+#         "lat": lat,
+#         "lon": lon,
+#         "text": hover_text,
+#         "hoverinfo": "text",
+#         "marker": {
+#             "size": 15,
+#             "line": {
+#                 "color": "rgb(8,8,8)",
+#                 "width": 1
+#             },
+#         }
+#     }]
 
-    return jsonify(pet_data)
+#     return jsonify(pet_data)
