@@ -38,6 +38,6 @@ CREATE TABLE "Stations" (
      )
 );
 
-ALTER TABLE "North" ADD CONSTRAINT "fk_North_station_id" FOREIGN KEY("station_id")
-REFERENCES "Stations" ("station_id");
+ALTER TABLE "north" ADD CONSTRAINT "fk_north_station_id" FOREIGN KEY("station_id")
+REFERENCES "stations" ("station_id");
 
