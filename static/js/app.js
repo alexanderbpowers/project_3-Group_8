@@ -7,17 +7,6 @@ d3.json(url).then(function(response) {
 
 
 
-// d3.json("/api/north.json").then((response) =>
-//   console.log(response)
-//   );
-
-// d3.json("/api/north.json", function(response) {
-//   console.log("hello");
-// });
-
-
-
-
 
 
 
