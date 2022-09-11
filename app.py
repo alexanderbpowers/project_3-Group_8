@@ -17,9 +17,6 @@ stations = Base.classes.stations
 
 session = Session(engine)
 
-print(north_table)
-print(stations)
-
 
 ## Routes
 
@@ -56,6 +53,7 @@ def merged():
         stations.latitude
         ).all()
 
+
     station_data = []
 
     for index, station_id, date, hour, total_precipitation, max_temperature, min_temperature, max_humidity, min_humidity, wind_speed, station, year, month, index, station_id, station, region, state, first_date, height, longitude, latitude  in results:
@@ -89,6 +87,44 @@ def merged():
         station_data.append(all_dict)
 
     return jsonify(station_data)
+
+    
+@app.route("/api/stations")
+def apistation():
+    results = session.query(stations.index).all()
+    stat_data=[]
+
+    for index, station_id, date, hour, total_precipitation, max_temperature, min_temperature, max_humidity, min_humidity, wind_speed, station, year, month, index, station_id, station, region, state, first_date, height, longitude, latitude  in results:
+        north_dict = {}
+        stations_dict = {}
+        all_dict = {}
+        north_dict['index'] = index
+        north_dict['station_id'] = station_id
+        north_dict['date'] = date
+        north_dict['hour'] = hour
+        north_dict['total_precipitation'] = total_precipitation
+        north_dict['max_temperature'] = max_temperature
+        north_dict['min_temperature'] = min_temperature
+        north_dict['max_humidity'] = max_humidity
+        north_dict['min_humidity'] = min_humidity
+        north_dict['wind_speed'] = wind_speed
+        north_dict['station'] = station
+        north_dict['year'] = year
+        north_dict['month'] = month
+        stations_dict['index'] = index
+        stations_dict['station_id'] = station_id
+        stations_dict['station'] = station
+        stations_dict['region'] = region
+        stations_dict['state'] = state
+        stations_dict['first_date'] = first_date
+        stations_dict['height'] = height
+        stations_dict['longitude'] = longitude
+        stations_dict['latitude'] = latitude
+        all_dict["north"] = north_dict
+        all_dict["station"] = stations_dict
+        stat_data.append(all_dict)
+
+    return jsonify(stat_data)
 
 # @app.route("/api/north")
 # def north():
