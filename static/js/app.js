@@ -1,46 +1,39 @@
-var url = "http://127.0.0.1:5000/api/north"
+const url = "http://127.0.0.1:5000/api/north"
+const stations_url = "http://127.0.0.1:5000/api/stations"
 
 d3.json(url).then(function(response) {
+  console.log(response[0].north.station_id);
+});
+
+d3.json(stations_url).then(function(response) {
   console.log(response);
 });
 
 
-
-
-
-
-
-// // Create listner function for changes on dropdown
-function optionChanged(weatherDate) {
-  demoInfo(station);
-  hBar(station);
-  bubble(station);
-  gauge(station);
-}
-
-// dropdown select function for selecting/ refreshing page
 function dropMenu() {
+  d3.json(stations_url).then(function(data) {
+    arr = []
+    
+    for (var x = 0; x < data.length; x++) {
+      var ids = data[x].station_id
+      arr.push(ids)
+    }
+    console.log(arr)
+    var dropDown = ""
+    for (var x = 0; x < arr.length; x++) {
+      dropDown += '<option>' + arr[x] + '</option>'
+    }
+    console.log(dropDown)
+    document.getElementById("selDataset").innerHTML = dropDown;
 
-  // create id dropdown list
-  var selection = d3.select("#selDataset");
-
-  d3.json("/api/north").then((data) => {
-    var date = data.date;
-    station.forEach((day) => {
-      selection
-        .append("option")
-        .text(days)
-        .property("value", day);
-    });
-
-    //set default value
-    var defaultDate = date[0];
-    hBar(defaultDate);
-    demoInfo(defaultDate);
-    bubble(defaultDate);
-    gauge(defaultDate);
-  });
+    // var defaultDate = data[0].north.station_id;
+    // hBar(defaultDate);
+    // demoInfo(defaultDate);
+    // bubble(defaultDate);
+    // gauge(defaultDate);
+  })
 }
+
 
 // used sample id to poplate infoPanel with details
 function demoInfo(id) {
