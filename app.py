@@ -49,8 +49,29 @@ def north():
     session = Session(engine)
 
     results = session.query(north_table.index,
-        ).all()
-
+            north_table.station_id,
+            north_table.date,
+            north_table.hour,
+            north_table.total_precipitation,
+            north_table.max_temperature,
+            north_table.min_temperature,
+            north_table.max_humidity,
+            north_table.min_humidity,
+            north_table.wind_speed,
+            north_table.station,
+            north_table.year,
+            north_table.month,
+            stations.index,
+            stations.station_id,
+            stations.station,
+            stations.region,
+            stations.state,
+            stations.first_date,
+            stations.height,
+            stations.longitude,
+            stations.latitude
+            ).all()
+        
     session.close()
 
     north_data = []
@@ -88,19 +109,19 @@ def north():
     return jsonify(north_data)
 
 
-@app.route("/api/station_names")
-def stations():
-    session = Session(engine)
-    results = session.query(stations.station_id, stations.station).all()
-    session.close()
-    results_arr = []
-    for station_id, station in results:
-        station_dict = {}
-        station_dict['station_id'] = station_id
-        station_dict['station'] = station
-        results_arr.append(station_dict)
+# @app.route("/api/station_names")
+# def stations():
+#     session = Session(engine)
+#     results = session.query(stations.station_id, stations.station).all()
+#     session.close()
+#     results_arr = []
+#     for station_id, station in results:
+#         station_dict = {}
+#         station_dict['station_id'] = station_id
+#         station_dict['station'] = station
+#         results_arr.append(station_dict)
     
-    return jsonify(results_arr)
+#     return jsonify(results_arr)
 
 
 if __name__ == "__main__":
