@@ -18,11 +18,12 @@
 
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
-      <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      <a class="nav-link" href="#">Page two</a>
-      <a class="nav-link" href="#">Page three</a>
->
+      <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-link" href="map.html">Map</a>
+      <a class="nav-link" href="dashboard.html">Dashboard</a>
     </ul>
+  </div>
+</nav>
     
 
   </div>
@@ -30,13 +31,12 @@
 
 <body>
 
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12 jumbotron text-center">
-        <h1>North Region Weather for Northern Stations in Brazil</h1>
-        <p></p>
-      </div>
+  <section class="jumbotron text-center">
+    <div class="container">
+      <h1 class="jumbotron-heading">Weather information in Northern Brazil</h1>
+      <p class="lead text-muted">An interactive weather website with information gathererd from the weather stations in North Brazil.</p>
     </div>
+  </section>
     <div class="row">
       <div class="col-md-3">
         <div class="well">
@@ -79,7 +79,7 @@
   <script src="https://d3js.org/d3.v5.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
   <script type="text/javascript" src="{{ url_for('static', filename = 'js/app.js') }}"></script>
-  <script>
+<script>
 // var url = "http://127.0.0.1:5000/api/north"
 
 // d3.json(url).then(function(response) {
