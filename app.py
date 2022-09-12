@@ -36,6 +36,11 @@ def returnhome():
 def map():
     return render_template("map.html")
 
+@app.route("/dashboard.html")
+def dashboard():
+    return render_template("dashboard.html")
+
+
 @app.route("/api/stations")
 def merged():
     session = Session(engine)
