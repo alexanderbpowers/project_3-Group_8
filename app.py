@@ -1,4 +1,4 @@
-## Dependencies and set up
+### Dependencies and set up
 from flask import Flask, render_template, jsonify, request, redirect
 import numpy as np
 from sqlalchemy.ext.automap import automap_base
@@ -7,9 +7,23 @@ from sqlalchemy import create_engine
 
 app = Flask(__name__)
 
-#########################################
-## Flask app to render html
-#########################################
+@app.route("/")
+def home():
+    return render_template("index.html")
+
+postgres_uri = 'postgresql://irkqykpauqvpzm:b6a2bf95436de0394e29cb2c7b916b56f18fe92c6a3f5ac85638d94c4a93b081@ec2-107-22-122-106.compute-1.amazonaws.com:5432/d5tqri7nt2h2k0'
+engine = create_engine(postgres_uri)
+Base = automap_base()
+Base.prepare(engine, reflect=True)
+
+north_table = Base.classes.north
+stations = Base.classes.stations
+
+
+### Routes
+
+app = Flask(__name__)
+
 @app.route("/")
 def home():
     return render_template("index.html")
@@ -21,28 +35,30 @@ def returnhome():
 @app.route("/map.html")
 def map():
     return render_template("map.html")
-#########################################
-## Flask app to read database
-#########################################
-postgres_uri = 'postgresql://irkqykpauqvpzm:b6a2bf95436de0394e29cb2c7b916b56f18fe92c6a3f5ac85638d94c4a93b081@ec2-107-22-122-106.compute-1.amazonaws.com:5432/d5tqri7nt2h2k0'
-engine = create_engine(postgres_uri)
-Base = automap_base()
-Base.prepare(engine, reflect=True)
 
-north_table = Base.classes.north
-stations = Base.classes.stations
-
-session = Session(engine)
-
-
-## Routes
-
-app = Flask(__name__)
-
-@app.route("/")
-def home():
-    return render_template("index.html")
-
+@app.route("/api/stations")
+def merged():
+    session = Session(engine)
+    results = session.query(stations.station_id, 
+        stations.station, 
+        stations.state, 
+        stations.first_date, 
+        stations.height, 
+        stations.longitude, 
+        stations.latitude).all()
+    session.close()
+    station_data = []
+    for id, station, state, date, height, longitude, latitude in results:
+        station_dict = {}
+        station_dict["station_id"] = id
+        station_dict["station"] = station
+        station_dict["state"] = state
+        station_dict["first_date"] = date
+        station_dict["height"] = height
+        station_dict["longitude"] = longitude
+        station_dict["latitude"] = latitude
+        station_data.append(station_dict)
+    return jsonify(station_data)
 
 @app.route("/api/north")
 def north():
@@ -107,21 +123,6 @@ def north():
         north_data.append(all_dict)
 
     return jsonify(north_data)
-
-
-# @app.route("/api/station_names")
-# def stations():
-#     session = Session(engine)
-#     results = session.query(stations.station_id, stations.station).all()
-#     session.close()
-#     results_arr = []
-#     for station_id, station in results:
-#         station_dict = {}
-#         station_dict['station_id'] = station_id
-#         station_dict['station'] = station
-#         results_arr.append(station_dict)
-    
-#     return jsonify(results_arr)
 
 
 if __name__ == "__main__":
