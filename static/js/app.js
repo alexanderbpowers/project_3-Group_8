@@ -24,7 +24,7 @@ function dropMenu() {
       dropDown += '<option>' + arr[x] + '</option>'
     }
     console.log(dropDown)
-    document.getElementById("selDataset").innerHTML = dropDown;
+    document.getElementById("#selDataset").innerHTML = dropDown;
 
     // var defaultDate = data[0].north.station_id;
     // hBar(defaultDate);
