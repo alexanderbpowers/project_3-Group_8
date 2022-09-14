@@ -16,6 +16,16 @@ L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 }).addTo(myMap);
 
 //*************************************
+//Brazil States Boundary
+//*************************************
+var states_data_link = "../static/data/brazil_geo.json";
+
+d3.json(states_data_link).then(function(data){
+  console.log(data);
+  L.geoJson(data).addTo(myMap);
+});
+
+//*************************************
 // function to create a map with markers
 //*************************************
 function createMap(responce){
