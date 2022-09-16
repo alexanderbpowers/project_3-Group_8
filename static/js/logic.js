@@ -25,6 +25,7 @@ d3.json(states_data_link).then(function(data){
   L.geoJson(data).addTo(myMap);
 });
 
+
 //*************************************
 // function to create a map with markers
 //*************************************
@@ -33,14 +34,12 @@ for (var i=0; i<responce.length; i++){
   console.log([responce[i].latitude, responce[i].longitude]);
 
   // variable for popup input
-  var id = "Station_ID";
+  var id = "Explore Station";
   var id_input = id.concat(" ",":"," ", responce[i].station_id);
-  var state = "State Abbr.";
-  var state_input = state.concat(" ",":"," ", responce[i].state);
-  
+
   L.marker([responce[i].latitude, responce[i].longitude], {
     draggable: true
-  }).bindPopup("<p> "+ id_input +"</p><p> "+ state_input +"</p>").addTo(myMap);
+  }).bindPopup('<a href="/dashboard.html"> '+id_input+' </a>').addTo(myMap);
 };
 };
 
