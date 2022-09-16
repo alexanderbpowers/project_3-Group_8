@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<script>
+
+
+
+// var url = "http://127.0.0.1:5000/api/north"
+
+// d3.json(url).then(function(response) {
+  
+
+window.onload = function () {
+
+//Better to construct options first and then pass it as a parameter
+var options = {
+	animationEnabled: true,
+	zoomEnabled: true,
+	colorSet: "colorSet1",
+	title:{
+		text: "Humidity vs Temperature"
+	},
+	axisX: {
+		title:"Temperature (in °C)",      	
+		suffix: "°C",
+		crosshair: {
+			enabled: true,
+			snapToDataPoint: true
+		}
+	},
+	axisY:{
+		title: "Humidity",
+		gridThickness: 0,
+		crosshair: {
+			enabled: true,
+			snapToDataPoint: true
+		}
+	},
+	data: [{
+		type: "scatter",
+		toolTipContent: "<b>Temperature: </b>{x}°C<br/><b>Humidity: </b>{y}",
+		dataPoints: [
+			{ x: 24.0, y: 94.0},
+			{ x: 25.9, y: 82.0},
+			{ x: 24.9, y: 90.0},
+			{ x: 25.5, y: 89.0},
+			{ x: 25.1, y: 92}
+			
+
+		]
+    //     dataPoints :[
+    //         {x : response[0].north.max_temperature, y: response[0]north.max_humidity},
+    //         {x : response[1].north.max_temperature, y: response[1]north.max_humidity},
+    //         {x : response[2].north.max_temperature, y: response[2]north.max_humidity},
+    //         {x : response[3].north.max_temperature, y: response[3]north.max_humidity}
+
+	}]
+};
+
+$("#chartContainer").CanvasJSChart(options);
+}
+
+
+// });
+</script>
+</head>
+<body>
+<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+</body>
+</html>
