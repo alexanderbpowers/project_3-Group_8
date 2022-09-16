@@ -9,6 +9,7 @@ d3.json(stations_url).then(function(response) {
   console.log(response);
 });
 
+window.onload = function() {
 
 function dropMenu() {
   d3.json(stations_url).then(function(data) {
@@ -24,18 +25,54 @@ function dropMenu() {
       dropDown += '<option>' + arr[x] + '</option>'
     }
     console.log(dropDown)
-    document.getElementById("#selDataset").innerHTML = dropDown;
+    document.getElementById("selDataset").innerHTML = dropDown;
 
-    var input = d3.select('#selDataset').property("value")
+    // var input = d3.select('#selDataset').property("value")
 
-    var defaultDate = data[0].north.station_id;
+    // var defaultDate = data[0].north.station_id;
 
-    hBar(defaultDate);
-    demoInfo(defaultDate);
-    bubble(defaultDate);
-    gauge(defaultDate);
+    // hBar(defaultDate);
+    // demoInfo(defaultDate);
+    // bubble(defaultDate);
+    // gauge(defaultDate);
   })
-}
+};
+
+function scatterInit() {
+  d3.json(url).then(function(response) {
+      var chart = new CanvasJS.Chart("bubble",
+      {
+        animationEnabled: true,  
+        title:{
+          text: "Temperature Over A Year"
+        },
+        axisX: {
+          valueFormatString: "MMM"
+        },
+        axisY: {
+          title: "Temperature",
+          suffix: "(C°)"
+        },
+        data: [{
+          xValueFormatString: "MMMM",
+          type: "spline",
+          dataPoints: [
+          { x: 24.0, y: 94.0},
+          { x: 25.9, y: 82.0},
+          { x: 24.9, y: 90.0},
+          { x: 25.5, y: 89.0},
+          { x: 25.1, y: 92}
+        ]
+      }]
+
+      });
+      chart.render();
+    };
+  };
+};
+
+scatterInit()
+
 
 // used sample id to poplate infoPanel with details
 function demoInfo(id) {
@@ -253,6 +290,6 @@ function gauge(id) {
 /////
 dropMenu()
 
-
+}
 
 
