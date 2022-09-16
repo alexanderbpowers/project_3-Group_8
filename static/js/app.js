@@ -23,8 +23,8 @@ function dropMenu() {
     for (var x = 0; x < arr.length; x++) {
       dropDown += '<option>' + arr[x] + '</option>'
     }
-
-    document.getElementById("selDataset").innerHTML = dropDown;
+    console.log(dropDown)
+    document.getElementById("#selDataset").innerHTML = dropDown;
 
     var input = d3.select('#selDataset').property("value")
 
