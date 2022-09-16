@@ -23,17 +23,19 @@ function dropMenu() {
     for (var x = 0; x < arr.length; x++) {
       dropDown += '<option>' + arr[x] + '</option>'
     }
-    console.log(dropDown)
+
     document.getElementById("selDataset").innerHTML = dropDown;
 
-    // var defaultDate = data[0].north.station_id;
-    // hBar(defaultDate);
-    // demoInfo(defaultDate);
-    // bubble(defaultDate);
-    // gauge(defaultDate);
+    var input = d3.select('#selDataset').property("value")
+
+    var defaultDate = data[0].north.station_id;
+
+    hBar(defaultDate);
+    demoInfo(defaultDate);
+    bubble(defaultDate);
+    gauge(defaultDate);
   })
 }
-
 
 // used sample id to poplate infoPanel with details
 function demoInfo(id) {
@@ -193,7 +195,62 @@ function gauge(id) {
   });
 };
 
-// Initiate refresh of html
+// Alexander's Gauge
+
+// domain: { x: [0, 1], y: [0, 1] },
+// value: 5,
+// title: { text: "Belly Button Washing Frequency"},
+// type: "indicator",
+// mode: "gauge+number",
+// delta: { reference: 5 },
+// gauge: { 
+//   axis: { range: [null, 9] },
+//   bar: {color: "hotpink"},
+//   steps: [
+//       { range: [0, 9], color: "greenyellow" },
+//     ]}
+// };
+
+// var layout3 = {
+// width: 600, 
+// height: 400,
+// paper_bgcolor: 'rgba(0,0,0,0)',
+// plot_bgcolor: 'rgba(0,0,0,0)'
+
+// };
+
+// data3 = [trace3]
+
+// Plotly.newPlot("gauge", data3, layout3)
+
+
+
+/// A's demographic data box
+
+// GET DEMOGRAPHIC DATA
+// var demographicArr = data[0].metadata.filter(d => d.id == input)
+// // console.log(`demoObj: ${JSON.stringify(demographicArr)}`)
+// var id = demographicArr[0].id
+// var ethnicity = demographicArr[0].ethnicity
+// var gender = demographicArr[0].gender
+// var age = demographicArr[0].age
+// var location = demographicArr[0].location
+// var bbtype = demographicArr[0].bbtype
+// var wfreq = demographicArr[0].wfreq
+
+// // APPEND DEMOGRAPHIC INFO
+// var list = d3.select(".demographicInfo")
+// list.html("")
+// list.append("li").text(`ID: ${id}`)
+// list.append("li").text(`Ethnicity: ${ethnicity}`)
+// list.append("li").text(`Gender: ${gender}`)
+// list.append("li").text(`Age: ${age}`)
+// list.append("li").text(`Location: ${location}`)
+// list.append("li").text(`Bbtype: ${bbtype}`)
+// list.append("li").text(`Wfreq: ${wfreq}`)
+
+
+/////
 dropMenu()
 
 
