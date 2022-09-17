@@ -67,9 +67,8 @@ function scatterInit() {
 
       });
       chart.render();
-    };
+    });
   };
-};
 
 scatterInit()
 
@@ -290,6 +289,6 @@ function gauge(id) {
 /////
 dropMenu()
 
-}
+};
 
 
