@@ -11,7 +11,7 @@ L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
   tileSize: 512,
   maxZoom: 18,
   zoomOffset: -1,
-  id: "mapbox/streets-v11",
+  id: "mapbox/satellite-streets-v11",
   accessToken: API_KEY
 }).addTo(myMap);
 
@@ -22,7 +22,10 @@ var states_data_link = "../static/data/brazil_geo.json";
 
 d3.json(states_data_link).then(function(data){
   console.log(data);
-  L.geoJson(data).addTo(myMap);
+  L.geoJson(data,{
+    fillOpacity: 0.05,
+    weight: 3
+  }).addTo(myMap);
 });
 
 //*************************************
@@ -33,14 +36,12 @@ for (var i=0; i<responce.length; i++){
   console.log([responce[i].latitude, responce[i].longitude]);
 
   // variable for popup input
-  var id = "Station_ID";
+  var id = "Explore Station";
   var id_input = id.concat(" ",":"," ", responce[i].station_id);
-  var state = "State Abbr.";
-  var state_input = state.concat(" ",":"," ", responce[i].state);
-  
+
   L.marker([responce[i].latitude, responce[i].longitude], {
     draggable: true
-  }).bindPopup("<p> "+ id_input +"</p><p> "+ state_input +"</p>").addTo(myMap);
+  }).bindPopup('<a href="/dashboard.html"> '+id_input+' </a>').addTo(myMap);
 };
 };
 
