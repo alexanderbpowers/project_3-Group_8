@@ -68,7 +68,6 @@ def merged():
 @app.route("/api/north")
 def north():
     session = Session(engine)
-
     results = session.query(north_table.index,
             north_table.station_id,
             north_table.date,
@@ -81,26 +80,12 @@ def north():
             north_table.wind_speed,
             north_table.station,
             north_table.year,
-            north_table.month,
-            stations.index,
-            stations.station_id,
-            stations.station,
-            stations.region,
-            stations.state,
-            stations.first_date,
-            stations.height,
-            stations.longitude,
-            stations.latitude
+            north_table.month
             ).all()
-        
     session.close()
-
     north_data = []
-
-    for index, station_id, date, hour, total_precipitation, max_temperature, min_temperature, max_humidity, min_humidity, wind_speed, station, year, month, index, station_id, station, region, state, first_date, height, longitude, latitude  in results:
+    for index, station_id, date, hour, total_precipitation, max_temperature, min_temperature, max_humidity, min_humidity, wind_speed, station, year, month in results:
         north_dict = {}
-        stations_dict = {}
-        all_dict = {}
         north_dict['index'] = index
         north_dict['station_id'] = station_id
         north_dict['date'] = date
@@ -114,18 +99,7 @@ def north():
         north_dict['station'] = station
         north_dict['year'] = year
         north_dict['month'] = month
-        stations_dict['index'] = index
-        stations_dict['station_id'] = station_id
-        stations_dict['station'] = station
-        stations_dict['region'] = region
-        stations_dict['state'] = state
-        stations_dict['first_date'] = first_date
-        stations_dict['height'] = height
-        stations_dict['longitude'] = longitude
-        stations_dict['latitude'] = latitude
-        all_dict["north"] = north_dict
-        all_dict["station"] = stations_dict
-        north_data.append(all_dict)
+        north_data.append(north_dict)
 
     return jsonify(north_data)
 

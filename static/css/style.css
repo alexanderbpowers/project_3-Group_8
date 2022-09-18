@@ -1,0 +1,30 @@
+.aText {
+    font-family: 'Droid Serif', serif;
+    font-size: 16px;
+    text-anchor: middle;
+  }
+  
+.active {
+    font-weight: bold;
+    fill: #000;
+    transition: fill 0.3s ease-out;
+    text-anchor: middle;
+  }
+  
+.inactive {
+    font-weight: lighter;
+    fill: #c9c9c9;
+    transition: fill 0.3s ease-out;
+    text-anchor: middle;
+  }
+  
+.inactive:hover {
+    fill: #000;
+    cursor: pointer;
+  }
+
+/* .bg1 {
+    background: url('https://thumbs.dreamstime.com/b/brazilian-beach-yellow-sand-blue-sea-sunny-weather-brazil-salvador-south-america-sao-da-bahia-de-todos-os-santos-147583937.jpg') no-repeat;
+    background-position: centre top;
+
+  } */
