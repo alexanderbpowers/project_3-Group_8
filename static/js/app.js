@@ -32,6 +32,7 @@ function init() {
         function demoInfo() {
           var input = d3.select('#selDataset').property("value")
           var demographicArr = data.filter(d => d.station_id == input)
+          console.log(data)
           console.log(demographicArr)
           var station_id = demographicArr[0].station_id
           var station = demographicArr[0].station
