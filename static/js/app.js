@@ -1,6 +1,6 @@
-const url = "http://127.0.0.1:5000/api/north"
+const url = "https://project-3-group-8.herokuapp.com/api/north"
 const northdatafile = "./northdata.csv"
-const stations_url = "http://127.0.0.1:5000/api/stations"
+const stations_url = "https://project-3-group-8.herokuapp.com/api/north"
 
 var svgHeight = 600
 var svgWidth = 1000
