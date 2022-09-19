@@ -31,10 +31,13 @@ function init() {
 
         function demoInfo() {
           var input = d3.select('#selDataset').property("value")
-          var demographicArr = data.filter(d => d.station_id == input)
-          console.log(demographicArr)
-          var station_id = demographicArr[0].station_id
-          var station = demographicArr[0].station
+          for (var x = 0; x < data.length; x++) {
+            if (data[x].station_id == input){
+              station = data[x].station
+              station_id = data[x].station_id
+            }
+          }
+
       
           var list = d3.select("#sample-metadata")
               list.html("")
@@ -57,7 +60,7 @@ function init() {
             maxTempArr.push(data[x].max_temperature)
           }
         }
-        maxTempArr.sort((a,b) => a - b)
+      
     
         var minTempArr = []
         for (var x = 0; x < data.length; x++) {
@@ -65,7 +68,7 @@ function init() {
             minTempArr.push(data[x].min_temperature)
           }
         }
-        minTempArr.sort((a,b) => a - b)
+   
     
         // GRAB MAX HUMIDITY
         var maxHumidityArr = []
@@ -74,7 +77,7 @@ function init() {
             maxHumidityArr.push(data[x].max_humidity)
           }
         }
-        maxHumidityArr.sort((a,b) => a - b)
+
     
         // GRAB MIN HUMIDITY
         var minHumidityArr = []
@@ -83,7 +86,7 @@ function init() {
             minHumidityArr.push(data[x].min_humidity)
           }
         }
-        minHumidityArr.sort((a,b) => a - b)
+
     
         // DECLARE LABEL
         yLabel = "temperature"
