@@ -8,3 +8,4 @@ stations.csv
 columns_descrption.csv
 make_dataset.py
 metrics.py
+static/js/no.js
